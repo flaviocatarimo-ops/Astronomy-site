@@ -2,68 +2,92 @@
 <html lang="pt">
 <head>
     <meta charset="UTF-8">
-    <title>Astrofotografia - Flávio Silva</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minha Galeria de Astrofotografia</title>
     <style>
-        body { 
-            background-color: #0b0f19; 
-            color: #ffffff; 
-            font-family: Arial, sans-serif; 
-            text-align: center; 
-            padding: 20px; 
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #0b0f19;
+            color: #ffffff;
+            margin: 0;
+            padding: 20px;
+            text-align: center;
         }
-        .gallery { 
-            display: flex; 
-            flex-wrap: wrap; 
-            justify-content: center; 
-            gap: 20px; 
-            margin-top: 20px; 
+        h1 {
+            margin-bottom: 5px;
         }
-        .photo-card { 
-            background: #161b22; 
-            padding: 15px; 
-            border-radius: 8px; 
-            box-shadow: 0 4px 10px rgba(0,0,0,0.5); 
-            width: 300px;
+        p {
+            color: #8a99ad;
+            margin-bottom: 30px;
         }
-        img { 
-            max-width: 100%; 
-            height: auto; 
-            border-radius: 6px; 
+        .gallery-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
         }
-        h1 { color: #58a6ff; }
-        p { font-size: 14px; color: #8b949e; word-break: break-all; }
+        .card {
+            background-color: #161b22;
+            border: 1px: solid #30363d;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+            display: flex;
+            flex-direction: column;
+        }
+        .card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        .card-title {
+            padding: 15px;
+            font-size: 14px;
+            color: #c9d1d9;
+            word-break: break-all;
+        }
     </style>
 </head>
 <body>
+
     <h1>Minha Galeria de Astrofotografia</h1>
     <p>Trabalhos de captura e processamento com telescópio.</p>
-    
-    <!-- A galeria será preenchida automaticamente pelo script -->
-    <div class="gallery" id="gallery"></div>
+
+    <div class="gallery-container" id="gallery"></div>
 
     <script>
-        // METE AQUI OS NOMES DE TODOS OS FICHEIROS QUE ESTÃO NA TUA PASTA 'images'
+        // Lista exata dos ficheiros de imagem que tens atualmente no repositório
         const imagens = [
-            "IMG_20260612_235411.jpg",
             "2026-10-29T21.46.26.png",
             "2026-10-29T21.46.38.png",
             "20260327_222156.jpg",
-            "PSX_20260325_192511.jpg"
-            // Quando adicionares mais fotos à pasta, basta colocares o nome aqui em baixo:
-            // "nova-foto.jpg",
+            "IMG_20260612_235411.jpg",
+            "PSX_20260325_192511.jpg",
+            "Screenshot 2025-11-27 163445.png",
+            "Screenshot 2025-11-27 164725.png",
+            "Sol5.png",
+            "Sol6.png",
+            "sol.1.jpg",
+            "sol.2.png",
+            "sol.3.jpg",
+            "sol.3.png"
         ];
 
-        const galeriaDiv = document.getElementById("gallery");
+        const gallery = document.getElementById("gallery");
 
         imagens.forEach(nomeFicheiro => {
             const card = document.createElement("div");
-            card.className = "photo-card";
+            card.className = "card";
+
             card.innerHTML = `
-                <img src="Images/${nomeFicheiro}" alt="Astrofotografia">
-                <p>${nomeFicheiro}</p>
+                <img src="${nomeFicheiro}" alt="Astrofotografia">
+                <div class="card-title">${nomeFicheiro}</div>
             `;
-            galeriaDiv.appendChild(card);
+
+            gallery.appendChild(card);
         });
     </script>
+
 </body>
 </html>
