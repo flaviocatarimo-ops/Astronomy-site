@@ -38,17 +38,19 @@
     <h1>Minha Galeria de Astrofotografia</h1>
     <p>Trabalhos de captura e processamento com telescópio.</p>
     
+    <!-- A galeria será preenchida automaticamente pelo script -->
     <div class="gallery" id="gallery"></div>
 
     <script>
-        // Lista com os nomes exatos dos ficheiros que estão na pasta 'images'
+        // METE AQUI OS NOMES DE TODOS OS FICHEIROS QUE ESTÃO NA TUA PASTA 'images'
         const imagens = [
             "IMG_20260612_235411.jpg",
             "2026-10-29T21.46.26.png",
             "2026-10-29T21.46.38.png",
             "20260327_222156.jpg",
-            "PSX_20260325_192511.jpg",
-            "Screenshot_20260325_161541_Instagram.jpg"
+            "PSX_20260325_192511.jpg"
+            // Quando adicionares mais fotos à pasta, basta colocares o nome aqui em baixo:
+            // "nova-foto.jpg",
         ];
 
         const galeriaDiv = document.getElementById("gallery");
