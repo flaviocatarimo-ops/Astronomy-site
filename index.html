@@ -31,40 +31,33 @@
             border-radius: 6px; 
         }
         h1 { color: #58a6ff; }
-        p { font-size: 14px; color: #8b949e; word-break: break-all; }
     </style>
 </head>
 <body>
     <h1>Minha Galeria de Astrofotografia</h1>
     <p>Trabalhos de captura e processamento com telescópio.</p>
     
-    <!-- A galeria será preenchida automaticamente pelo script -->
-    <div class="gallery" id="gallery"></div>
-
-    <script>
-        // METE AQUI OS NOMES DE TODOS OS FICHEIROS QUE ESTÃO NA TUA PASTA 'images'
-        const imagens = [
-            "IMG_20260612_235411.jpg",
-            "2026-10-29T21.46.26.png",
-            "2026-10-29T21.46.38.png",
-            "20260327_222156.jpg",
-            "PSX_20260325_192511.jpg"
-            "Screenshot 2025-11-27 163445.png"
-            // Quando adicionares mais fotos à pasta, basta colocares o nome aqui em baixo:
-            // "nova-foto.jpg",
-        ];
-
-        const galeriaDiv = document.getElementById("gallery");
-
-        imagens.forEach(nomeFicheiro => {
-            const card = document.createElement("div");
-            card.className = "photo-card";
-            card.innerHTML = `
-                <img src="images/${nomeFicheiro}" alt="Astrofotografia">
-                <p>${nomeFicheiro}</p>
-            `;
-            galeriaDiv.appendChild(card);
-        });
-    </script>
+    <div class="gallery">
+        <div class="photo-card">
+            <img src="images/IMG_20260612_235411.jpg" alt="Astrofotografia">
+            <p>Registo Astronómico</p>
+        </div>
+        <div class="photo-card">
+            <img src="images/2026-10-29T21.46.26.png" alt="Astrofotografia">
+            <p>Processamento Siril</p>
+        </div>
+        <div class="photo-card">
+            <img src="images/2026-10-29T21.46.38.png" alt="Astrofotografia">
+            <p>Detalhe Planetário</p>
+        </div>
+        <div class="photo-card">
+            <img src="images/20260327_222156.jpg" alt="Astrofotografia">
+            <p>Observação</p>
+        </div>
+        <div class="photo-card">
+            <img src="images/PSX_20260325_192511.jpg" alt="Astrofotografia">
+            <p>Captura Celestrial</p>
+        </div>
+    </div>
 </body>
 </html>
