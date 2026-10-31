@@ -20,25 +20,25 @@
             min-height: 100vh;
         }
         
-        /* Cabeçalho limpo e bem espaçado */
+        /* Cabeçalho com espaçamento limpo */
         h1 {
-            margin-bottom: 8px;
+            margin-bottom: 10px;
             font-size: 32px;
             letter-spacing: 0.5px;
         }
         .subtitle {
             color: #8a99ad;
-            margin-bottom: 6px;
+            margin-bottom: 8px;
             font-size: 16px;
         }
         .author {
             color: #58a6ff;
-            margin-bottom: 35px;
+            margin-bottom: 30px;
             font-size: 15px;
             font-weight: bold;
         }
 
-        /* Botões de Navegação com bom espaçamento */
+        /* Botões de Navegação com bom respiro em baixo */
         .filter-container {
             display: flex;
             justify-content: center;
@@ -62,16 +62,16 @@
             color: #ffffff;
         }
 
-        /* Bloco de Introdução otimizado e legível */
+        /* Bloco de Introdução com excelente espaçamento entre linhas (line-height) */
         .intro-container {
-            max-width: 750px;
+            max-width: 800px;
             margin: 0 auto 40px auto;
             padding: 0 20px;
         }
         .intro-text {
             color: #c9d1d9;
             font-size: 16px;
-            line-height: 1.8;
+            line-height: 2.1; /* Linhas bem espaçadas e fáceis de ler */
             margin: 0;
             text-align: center;
         }
@@ -181,7 +181,7 @@
         <button class="filter-btn" onclick="filtrarGaleria('sol', this)">Sol</button>
     </div>
 
-    <!-- Bloco de Introdução com largura e espaçamento corrigidos -->
+    <!-- Bloco de Introdução com mais espaçamento vertical entre as linhas -->
     <div id="intro-home" class="intro-container">
         <p class="intro-text">
             Bem-vindo à minha página de astrofotografia. Aqui partilho o resultado de várias noites de observação e processamento astronómico com telescópio. Utilize os botões acima para explorar as diferentes categorias: desde nebulosas distantes e rastos estelares no <strong>Céu Profundo</strong>, passando pelos planetas e crateras do <strong>Sistema Solar / Lua</strong>, até aos detalhes da coroa e manchas na superfície do <strong>Sol</strong>.
@@ -285,7 +285,7 @@
     function filtrarGaleria(categoria, botao) {
         document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
         botao.classList.add('active');
-        renderizarGalergiaSeNecessario = renderizarGaleria(categoria);
+        renderizarGaleria(categoria);
     }
 
     renderizarGaleria('todos');
