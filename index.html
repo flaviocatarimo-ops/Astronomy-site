@@ -198,15 +198,14 @@
     // Carrega toda a galeria por defeito ao abrir a página
     renderizarGaleria(itensGaleria);
 
-    // Contador global fiável ligado a API pública de contagem
+    // Contador global corrigido para ler o parâmetro correto da API
     fetch('https://api.counterapi.dev/v1/flaviocatarimo-ops/astronomy-site/hit')
         .then(response => response.json())
         .then(data => {
-            document.getElementById('contador-visitas').innerText = data.value;
+            document.getElementById('contador-visitas').innerText = data.count;
         })
         .catch(error => {
-            // Fallback caso haja falha na rede
-            document.getElementById('contador-visitas').innerText = "15";
+            document.getElementById('contador-visitas').innerText = "1";
         });
 </script>
 </body>
