@@ -57,42 +57,40 @@
 
     <div class="gallery-container" id="gallery"></div>
 
-    <script>
-        // Lista exata dos ficheiros de imagem que tens atualmente no repositório
-      const imagens = [
-   
-    "images/2026-10-29T21.46.26.png",
-    "images/2026-10-29T21.46.38.png",
-    "images/FB_IMG_1697729740640.jpg",
-    "images/Sol5.png",
-    "images/Sol6.png",
-    "images/sol.1.jpg",
-    "images/sol.3.jpg",
-    "images/sol.3.png",
-    "images/IMG_20260616_232609.jpg",
-    "images/FB_IMG_1697729740640.jpg",
-    "images/20260226_203825.jpg",
-    "images/Screenshot_20231101_112836_Facebook.jpg",
-    "images/20250731_225930.jpg",
-    "images/20250731_230120.jpg",
-    "images/Screenshot_20231101_112533_Facebook.jpg",
-          
-];
+ <script>
+    // Lista com os caminhos dos ficheiros na pasta images
+    const imagens = [
+        "images/2026-10-29T21.46.26.png",
+        "images/2026-10-29T21.46.38.png",
+        "images/FB_IMG_1697729740640.jpg",
+        "images/Sol5.png",
+        "images/Sol6.png",
+        "images/sol.1.jpg",
+        "images/sol.3.jpg",
+        "images/sol.3.png",
+        "images/Screenshot 2025-11-27 164725.png",
+        "images/IMG_20260616_232609.jpg"
+    ];
 
-        const gallery = document.getElementById("gallery");
+    const gallery = document.getElementById("gallery");
 
-        imagens.forEach(nomeFicheiro => {
-            const card = document.createElement("div");
-            card.className = "card";
+    imagens.forEach(caminhoFicheiro => {
+        // Extrai apenas o nome do ficheiro (ex: "sol.1.jpg")
+        const nomeFicheiro = caminhoFicheiro.split('/').pop();
+        
+        // Retira a extensão do ficheiro para criar uma legenda limpa
+        const nomeLimpo = nomeFicheiro.substring(0, nomeFicheiro.lastIndexOf('.')) || nomeFicheiro;
 
-            card.innerHTML = `
-                <img src="${nomeFicheiro}" alt="Astrofotografia">
-                <div class="card-title">${nomeFicheiro}</div>
-            `;
+        const card = document.createElement("div");
+        card.className = "card";
 
-            gallery.appendChild(card);
-        });
-    </script>
+        card.innerHTML = `
+            <img src="${caminhoFicheiro}" alt="Astrofotografia">
+            <div class="card-title">${nomeLimpo}</div>
+        `;
 
+        gallery.appendChild(card);
+    });
+</script>
 </body>
 </html>
