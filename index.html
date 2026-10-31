@@ -28,6 +28,32 @@
             color: #8a99ad;
             margin-bottom: 20px;
         }
+        
+        /* Estilo para o Destaque Principal (Hero Section) */
+        .featured-container {
+            max-width: 800px;
+            margin: 0 auto 30px auto;
+            background-color: #161b22;
+            border: 1px solid #30363d;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 6px 12px rgba(0,0,0,0.4);
+        }
+        .featured-image {
+            width: 100%;
+            height: 350px;
+            object-fit: cover;
+            display: block;
+        }
+        .featured-caption {
+            padding: 15px;
+            font-size: 16px;
+            color: #58a6ff;
+            font-weight: bold;
+            background-color: #161b22;
+            border-top: 1px solid #30363d;
+        }
+
         /* Estilos para os botões de filtro por secções */
         .filter-container {
             display: flex;
@@ -110,6 +136,12 @@
     <h1>Minha Galeria de Astrofotografia</h1>
     <p>Trabalhos de captura e processamento com telescópio.</p>
     <p>Flávio da Silva</p>
+
+    <!-- Secção de Destaque Principal (Evita excesso de peso visual imediato na página) -->
+    <div class="featured-container">
+        <img src="images/2026-10-29T21.46.26.png" alt="Destaque Principal" class="featured-image">
+        <div class="featured-caption">✨ Destaque em Destaque: Nebulosa de Órion</div>
+    </div>
 
     <!-- Botões de navegação por categorias -->
     <div class="filter-container">
@@ -201,7 +233,6 @@
     // Sistema Inteligente de Contagem Global sem inflacionar as tuas próprias visitas neste dispositivo
     const jaVisitou = localStorage.getItem('siteVisitadoPorMim');
     
-    // Escolhe o URL: se já visitamos antes neste aparelho, apenas consultamos (GET); se é a primeira vez, somamos (HIT)
     const endpointContador = jaVisitou 
         ? 'https://api.counterapi.dev/v1/flaviocatarimo-ops/astronomy-site' 
         : 'https://api.counterapi.dev/v1/flaviocatarimo-ops/astronomy-site/hit';
@@ -210,7 +241,6 @@
         .then(response => response.json())
         .then(data => {
             document.getElementById('contador-visitas').innerText = data.count || data.value || "1";
-            // Marca como visitado neste navegador para que futuros refreshes teus não contem a dobrar
             if (!jaVisitou) {
                 localStorage.setItem('siteVisitadoPorMim', 'true');
             }
