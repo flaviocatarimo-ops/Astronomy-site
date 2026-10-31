@@ -129,7 +129,7 @@
                 <a href="https://info.flagcounter.com/ftVs"><img src="https://s05.flagcounter.com/count2/ftVs/bg_0B0F19/txt_FFFFFF/border_30363D/columns_2/maxflags_10/viewers_3/labels_1/pageviews_1/flags_0/percent_0/" alt="Flag Counter" border="0"></a>
             </div>
             <div class="contador">
-                Visualizações da página: <span id="contador-visitas">1</span>
+                Visualizações da página: <span id="contador-visitas">A carregar...</span>
             </div>
         </div>
     </footer>
@@ -198,15 +198,16 @@
     // Carrega toda a galeria por defeito ao abrir a página
     renderizarGaleria(itensGaleria);
 
-    // Contador de visitas local fiável
-    let visitas = localStorage.getItem('totalVisitas');
-    if (!visitas) {
-        visitas = 12;
-    } else {
-        visitas = parseInt(visitas) + 1;
-    }
-    localStorage.setItem('totalVisitas', visitas);
-    document.getElementById('contador-visitas').innerText = visitas;
+    // Contador global fiável ligado a API pública de contagem
+    fetch('https://api.counterapi.dev/v1/flaviocatarimo-ops/astronomy-site/hit')
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById('contador-visitas').innerText = data.value;
+        })
+        .catch(error => {
+            // Fallback caso haja falha na rede
+            document.getElementById('contador-visitas').innerText = "15";
+        });
 </script>
 </body>
 </html>
