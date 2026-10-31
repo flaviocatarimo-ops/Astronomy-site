@@ -40,7 +40,7 @@
             display: flex;
             justify-content: center;
             gap: 10px;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
             flex-wrap: wrap;
         }
         .filter-btn {
@@ -59,13 +59,13 @@
             color: #ffffff;
         }
 
-        /* Texto de Introdução na Página Inicial */
+        /* Texto de Introdução com letras maiores e mais legíveis */
         .intro-text {
-            max-width: 700px;
-            margin: 0 auto 25px auto;
-            color: #8a99ad;
-            font-size: 14px;
-            line-height: 1.6;
+            max-width: 750px;
+            margin: 0 auto 30px auto;
+            color: #c9d1d9;
+            font-size: 16px;
+            line-height: 1.7;
             padding: 0 15px;
         }
         
@@ -172,7 +172,7 @@
         <button class="filter-btn" onclick="filtrarGaleria('sol', this)">Sol</button>
     </div>
 
-    <!-- Texto de Introdução para as outras páginas -->
+    <!-- Texto de Introdução com letra maior e melhor contraste -->
     <div id="intro-home" class="intro-text">
         Bem-vindo à minha página de astrofotografia. Aqui partilho o resultado de várias noites de observação e processamento astronómico com telescópio. Utilize os botões acima para explorar as diferentes categorias: desde nebulosas distantes e rastos estelares no <strong>Céu Profundo</strong>, passando pelos planetas e crateras do <strong>Sistema Solar / Lua</strong>, até aos detalhes da coroa e manchas na superfície do <strong>Sol</strong>.
     </div>
@@ -255,11 +255,9 @@
         const sol = itensGaleria.filter(i => i.categoria === 'sol');
 
         if (filtro === 'todos') {
-            // No Início, mostra o texto de introdução e a imagem de destaque
             blocoIntro.style.display = "block";
             blocoDestaque.style.display = "block";
         } else {
-            // Quando clica numa categoria, oculta a introdução e o destaque da home para mostrar apenas os trabalhos da categoria
             blocoIntro.style.display = "none";
             blocoDestaque.style.display = "none";
 
@@ -279,7 +277,6 @@
         renderizarGaleria(categoria);
     }
 
-    // Arranque inicial na página de Início
     renderizarGaleria('todos');
 
     // Contador inteligente global
@@ -293,7 +290,7 @@
         .then(data => {
             document.getElementById('contador-visitas').innerText = data.count || data.value || "1";
             if (!jaVisitou) {
-                localStorage.setItem('siteVisitadoPorMim', 'true');
+                localStorage.setItem('siteVisitadoPorNum', 'true');
             }
         })
         .catch(error => {
