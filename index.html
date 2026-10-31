@@ -35,7 +35,7 @@
             font-weight: bold;
         }
         
-        /* Destaque Principal Compacto e Equilibrado */
+        /* Destaque Principal Compacto e Elegante */
         .featured-container {
             max-width: 600px;
             margin: 0 auto 30px auto;
@@ -154,7 +154,7 @@
     <div class="subtitle">Trabalhos de captura e processamento com telescópio.</div>
     <div class="author">Flávio da Silva</div>
 
-    <!-- Destaque Principal Reduzido e Elegante -->
+    <!-- Destaque Principal Limpo no Topo -->
     <div class="featured-container">
         <img src="images/2026-10-29T21.46.26.png" alt="Destaque Principal" class="featured-image">
         <div class="featured-caption">✨ Imagem em Destaque: Nebulosa de Órion</div>
@@ -162,13 +162,13 @@
 
     <!-- Botões de navegação por categorias -->
     <div class="filter-container">
-        <button class="filter-btn active" onclick="filtrarGaleria('todos', this)">Todos</button>
+        <button class="filter-btn active" onclick="filtrarGaleria('todos', this)">Início</button>
         <button class="filter-btn" onclick="filtrarGaleria('ceu-profundo', this)">Céu Profundo</button>
         <button class="filter-btn" onclick="filtrarGaleria('sistema-solar', this)">Sistema Solar / Lua</button>
         <button class="filter-btn" onclick="filtrarGaleria('sol', this)">Sol</button>
     </div>
 
-    <!-- Conteúdo Dinâmico Organizado -->
+    <!-- Conteúdo Dinâmico -->
     <div id="conteudo-principal"></div>
 
     <footer>
@@ -203,7 +203,7 @@
         { tipo: "imagem", caminho: "images/Sol5.png", legenda: "Sol - Processamento", categoria: "sol" },
         { tipo: "imagem", caminho: "images/Sol6.png", legenda: "Disco Solar Detalhado", categoria: "sol" },
         { tipo: "imagem", caminho: "images/sol.1.jpg", legenda: "Observação Solar 1", categoria: "sol" },
-        { tipo: "imagem", caminho: "images/sol.3.jpg", legenda: "Observação Solar 3", categoria: "sol" },
+        { tipo: "imagem", caminho: "images/sol.3.jpg", legenda: "Observação Solar 2", categoria: "sol" },
         { tipo: "imagem", caminho: "images/sol.3.png", legenda: "Análise do Sol", categoria: "sol" }
     ];
 
@@ -238,9 +238,8 @@
         const sol = itensGaleria.filter(i => i.categoria === 'sol');
 
         if (filtro === 'todos') {
-            containerPrincipal.innerHTML += criarSecao("🌌 Céu Profundo", ceuProfundo);
-            containerPrincipal.innerHTML += criarSecao("🪐 Sistema Solar / Lua", sistemaSolar);
-            containerPrincipal.innerHTML += criarSecao("☀️ Sol", sol);
+            // No estado inicial ("Início"), não mostramos nenhuma grelha de imagens para a página ficar limpa
+            containerPrincipal.innerHTML = '<div style="color: #8a99ad; margin-top: 20px; font-size: 14px;">Selecione uma categoria acima para explorar os trabalhos.</div>';
         } else if (filtro === 'ceu-profundo') {
             containerPrincipal.innerHTML += criarSecao("🌌 Céu Profundo", ceuProfundo);
         } else if (filtro === 'sistema-solar') {
@@ -256,6 +255,7 @@
         renderizarGaleria(categoria);
     }
 
+    // Arranque limpo: a página principal mostra apenas o destaque e o menu
     renderizarGaleria('todos');
 
     // Contador inteligente global
