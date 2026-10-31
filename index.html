@@ -198,11 +198,22 @@
     // Carrega toda a galeria por defeito ao abrir a página
     renderizarGaleria(itensGaleria);
 
-    // Contador global à prova de falhas para evitar valores indefinidos
-    fetch('https://api.counterapi.dev/v1/flaviocatarimo-ops/astronomy-site/hit')
+    // Sistema Inteligente de Contagem Global sem inflacionar as tuas próprias visitas neste dispositivo
+    const jaVisitou = localStorage.getItem('siteVisitadoPorMim');
+    
+    // Escolhe o URL: se já visitamos antes neste aparelho, apenas consultamos (GET); se é a primeira vez, somamos (HIT)
+    const endpointContador = jaVisitou 
+        ? 'https://api.counterapi.dev/v1/flaviocatarimo-ops/astronomy-site' 
+        : 'https://api.counterapi.dev/v1/flaviocatarimo-ops/astronomy-site/hit';
+
+    fetch(endpointContador)
         .then(response => response.json())
         .then(data => {
             document.getElementById('contador-visitas').innerText = data.count || data.value || "1";
+            // Marca como visitado neste navegador para que futuros refreshes teus não contem a dobrar
+            if (!jaVisitou) {
+                localStorage.setItem('siteVisitadoPorMim', 'true');
+            }
         })
         .catch(error => {
             document.getElementById('contador-visitas').innerText = "1";
