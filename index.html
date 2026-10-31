@@ -12,6 +12,9 @@
             margin: 0;
             padding: 20px;
             text-align: center;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
         }
         h1 {
             margin-bottom: 5px;
@@ -26,6 +29,7 @@
             gap: 20px;
             max-width: 1200px;
             margin: 0 auto;
+            flex: 1;
         }
         .card {
             background-color: #161b22;
@@ -47,15 +51,26 @@
             color: #c9d1d9;
             word-break: break-all;
         }
+        footer {
+            margin-top: 40px;
+            padding: 20px;
+            color: #8a99ad;
+            font-size: 13px;
+            border-top: 1px solid #30363d;
+        }
     </style>
 </head>
 <body>
 
     <h1>Minha Galeria de Astrofotografia</h1>
     <p>Trabalhos de captura e processamento com telescópio.</p>
-    <p>Flávio da Silva</p>
+    <p><b>Flávio Silva</b></p>
 
     <div class="gallery-container" id="gallery"></div>
+
+    <footer>
+        &copy; 2026 Flávio Silva. Todos os direitos reservados.
+    </footer>
 
 <script>
     // Lista com os caminhos dos ficheiros na pasta images
