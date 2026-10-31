@@ -34,8 +34,32 @@
             font-size: 15px;
             font-weight: bold;
         }
+
+        /* Botões de Filtro (agora no topo) */
+        .filter-container {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+        }
+        .filter-btn {
+            background-color: #161b22;
+            color: #c9d1d9;
+            border: 1px solid #30363d;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background-color 0.2s, border-color 0.2s;
+        }
+        .filter-btn:hover, .filter-btn.active {
+            background-color: #30363d;
+            border-color: #58a6ff;
+            color: #ffffff;
+        }
         
-        /* Destaque Principal Compacto e Elegante */
+        /* Destaque Principal Compacto e Elegante (agora abaixo dos botões) */
         .featured-container {
             max-width: 600px;
             margin: 0 auto 30px auto;
@@ -58,30 +82,6 @@
             font-weight: bold;
             background-color: #161b22;
             border-top: 1px solid #30363d;
-        }
-
-        /* Botões de Filtro */
-        .filter-container {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            margin-bottom: 30px;
-            flex-wrap: wrap;
-        }
-        .filter-btn {
-            background-color: #161b22;
-            color: #c9d1d9;
-            border: 1px solid #30363d;
-            padding: 8px 16px;
-            border-radius: 6px;
-            cursor: pointer;
-            font-size: 14px;
-            transition: background-color 0.2s, border-color 0.2s;
-        }
-        .filter-btn:hover, .filter-btn.active {
-            background-color: #30363d;
-            border-color: #58a6ff;
-            color: #ffffff;
         }
 
         /* Secções e Grelhas */
@@ -154,18 +154,18 @@
     <div class="subtitle">Trabalhos de captura e processamento com telescópio.</div>
     <div class="author">Flávio da Silva</div>
 
-    <!-- Destaque Principal Limpo no Topo -->
-    <div class="featured-container">
-        <img src="images/2026-10-29T21.46.26.png" alt="Destaque Principal" class="featured-image">
-        <div class="featured-caption">✨ Imagem em Destaque: Nebulosa de Órion</div>
-    </div>
-
-    <!-- Botões de navegação por categorias -->
+    <!-- Botões de navegação por categorias (agora no topo) -->
     <div class="filter-container">
         <button class="filter-btn active" onclick="filtrarGaleria('todos', this)">Início</button>
         <button class="filter-btn" onclick="filtrarGaleria('ceu-profundo', this)">Céu Profundo</button>
         <button class="filter-btn" onclick="filtrarGaleria('sistema-solar', this)">Sistema Solar / Lua</button>
         <button class="filter-btn" onclick="filtrarGaleria('sol', this)">Sol</button>
+    </div>
+
+    <!-- Destaque Principal (agora logo abaixo dos botões) -->
+    <div id="destaque-home" class="featured-container">
+        <img src="images/2026-10-29T21.46.26.png" alt="Destaque Principal" class="featured-image">
+        <div class="featured-caption">✨ Imagem em Destaque: Nebulosa de Órion</div>
     </div>
 
     <!-- Conteúdo Dinâmico -->
@@ -208,6 +208,7 @@
     ];
 
     const containerPrincipal = document.getElementById("conteudo-principal");
+    const blocoDestaque = document.getElementById("destaque-home");
 
     function criarSecao(titulo, itens) {
         if (itens.length === 0) return "";
@@ -238,14 +239,19 @@
         const sol = itensGaleria.filter(i => i.categoria === 'sol');
 
         if (filtro === 'todos') {
-            // No estado inicial ("Início"), não mostramos nenhuma grelha de imagens para a página ficar limpa
-            containerPrincipal.innerHTML = '<div style="color: #8a99ad; margin-top: 20px; font-size: 14px;">Selecione uma categoria acima para explorar os trabalhos.</div>';
-        } else if (filtro === 'ceu-profundo') {
-            containerPrincipal.innerHTML += criarSecao("🌌 Céu Profundo", ceuProfundo);
-        } else if (filtro === 'sistema-solar') {
-            containerPrincipal.innerHTML += criarSecao("🪐 Sistema Solar / Lua", sistemaSolar);
-        } else if (filtro === 'sol') {
-            containerPrincipal.innerHTML += criarSecao("☀️ Sol", sol);
+            // No Início, mostra o destaque e oculta as grelhas completas
+            blocoDestaque.style.display = "block";
+        } else {
+            // Quando escolhe uma categoria, esconde o destaque grande para dar protagonismo total à categoria escolhida
+            blocoDestaque.style.display = "none";
+
+            if (filtro === 'ceu-profundo') {
+                containerPrincipal.innerHTML += criarSecao("🌌 Céu Profundo", ceuProfundo);
+            } else if (filtro === 'sistema-solar') {
+                containerPrincipal.innerHTML += criarSecao("🪐 Sistema Solar / Lua", sistemaSolar);
+            } else if (filtro === 'sol') {
+                containerPrincipal.innerHTML += criarSecao("☀️ Sol", sol);
+            }
         }
     }
 
@@ -255,7 +261,7 @@
         renderizarGaleria(categoria);
     }
 
-    // Arranque limpo: a página principal mostra apenas o destaque e o menu
+    // Arranque inicial
     renderizarGaleria('todos');
 
     // Contador inteligente global
