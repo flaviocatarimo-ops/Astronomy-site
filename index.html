@@ -135,7 +135,7 @@
     </footer>
 
 <script>
-    // Lista de itens atualizada com categorias para organização futura
+    // Lista de itens atualizada com as categorias corretas
     const itensGaleria = [
         // Céu profundo e rastos
         { tipo: "imagem", caminho: "images/2026-10-29T21.46.26.png", legenda: "Nebulosa de Órion", categoria: "ceu-profundo" },
@@ -184,7 +184,6 @@
 
     // Função para filtrar os itens ao clicar nos botões
     function filtrarGaleria(categoria, botao) {
-        // Atualiza o botão ativo visualmente
         document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
         botao.classList.add('active');
 
