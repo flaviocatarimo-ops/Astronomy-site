@@ -108,16 +108,6 @@
             align-items: center;
             gap: 12px;
         }
-        .counters-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 8px;
-        }
-        .contador {
-            font-size: 12px;
-            color: #58a6ff;
-        }
     </style>
 </head>
 <body>
@@ -137,13 +127,8 @@
 
     <footer>
         <div>&copy; 2026 Flávio da Silva. Todos os direitos reservados.</div>
-        <div class="counters-container">
-            <div>
-                <a href="https://info.flagcounter.com/ftVs"><img src="https://s05.flagcounter.com/count2/ftVs/bg_0B0F19/txt_FFFFFF/border_30363D/columns_2/maxflags_10/viewers_3/labels_1/pageviews_1/flags_0/percent_0/" alt="Flag Counter" border="0"></a>
-            </div>
-            <div class="contador">
-                Visualizações da página: <span id="contador-visitas">A carregar...</span>
-            </div>
+        <div>
+            <a href="https://info.flagcounter.com/ftVs"><img src="https://s05.flagcounter.com/count2/ftVs/bg_0B0F19/txt_FFFFFF/border_30363D/columns_2/maxflags_10/viewers_3/labels_1/pageviews_1/flags_0/percent_0/" alt="Flag Counter" border="0"></a>
         </div>
     </footer>
 
@@ -212,23 +197,6 @@
     }
 
     renderizarGaleria('todos');
-
-    const jaVisitou = localStorage.getItem('siteVisitadoPorMim');
-    const endpointContador = jaVisitou 
-        ? 'https://api.counterapi.dev/v1/flaviocatarimo-ops/astronomy-site' 
-        : 'https://api.counterapi.dev/v1/flaviocatarimo-ops/astronomy-site/hit';
-
-    fetch(endpointContador)
-        .then(response => response.json())
-        .then(data => {
-            document.getElementById('contador-visitas').innerText = data.count || data.value || "1";
-            if (!jaVisitou) {
-                localStorage.setItem('siteVisitadoPorMim', 'true');
-            }
-        })
-        .catch(error => {
-            document.getElementById('contador-visitas').innerText = "1";
-        });
 </script>
 </body>
 </html>
