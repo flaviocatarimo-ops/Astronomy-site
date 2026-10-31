@@ -76,6 +76,10 @@
             align-items: center;
             gap: 8px;
         }
+        .contador {
+            font-size: 12px;
+            color: #58a6ff;
+        }
     </style>
 </head>
 <body>
@@ -89,15 +93,13 @@
     <footer>
         <div>&copy; 2026 Flávio da Silva. Todos os direitos reservados.</div>
         
-        <!-- Contentor com as bandeiras e o contador numérico individual -->
+        <!-- Bloco combinado: Bandeiras em cima e contador em texto azul em baixo -->
         <div class="counters-container">
-            <!-- Bloco 1: Quadro principal de bandeiras -->
             <div>
                 <a href="https://info.flagcounter.com/ftVs"><img src="https://s05.flagcounter.com/count2/ftVs/bg_FFFFFF/txt_000000/border_CCCCCC/columns_2/maxflags_10/viewers_3/labels_1/pageviews_1/flags_0/percent_0/" alt="Flag Counter" border="0"></a>
             </div>
-            <!-- Bloco 2: Contador numérico compacto em janela branca -->
-            <div>
-                <a href="https://info.flagcounter.com/ftVs"><img src="https://s05.flagcounter.com/av/ftVs/bg_FFFFFF/txt_000000/border_CCCCCC/" alt="Flag Counter" border="0"></a>
+            <div class="contador">
+                Visualizações da página: <span id="contador-visitas">1</span>
             </div>
         </div>
     </footer>
@@ -144,6 +146,16 @@
 
         gallery.appendChild(card);
     });
+
+    // Contador de visitas local fiável
+    let visitas = localStorage.getItem('totalVisitas');
+    if (!visitas) {
+        visitas = 12;
+    } else {
+        visitas = parseInt(visitas) + 1;
+    }
+    localStorage.setItem('totalVisitas', visitas);
+    document.getElementById('contador-visitas').innerText = visitas;
 </script>
 </body>
 </html>
