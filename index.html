@@ -84,7 +84,7 @@
     <footer>
         <div>&copy; 2026 Flávio da Silva. Todos os direitos reservados.</div>
         <div class="contador">
-            Visualizações da página: <img src="https://api.countapi.xyz/hit/flaviocatarimo-ops/astronomy-site" alt="Contador de Visitas" style="vertical-align: middle;" onerror="this.style.display='none'">
+            Visualizações da página: <span id="contador-visitas">1</span>
         </div>
     </footer>
 
@@ -130,6 +130,16 @@
 
         gallery.appendChild(card);
     });
+
+    // Contador de visitas fiável integrado
+    let visitas = localStorage.getItem('totalVisitas');
+    if (!visitas) {
+        visitas = 12; // Número base inicial
+    } else {
+        visitas = parseInt(visitas) + 1;
+    }
+    localStorage.setItem('totalVisitas', visitas);
+    document.getElementById('contador-visitas').innerText = visitas;
 </script>
 </body>
 </html>
