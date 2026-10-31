@@ -28,6 +28,29 @@
             color: #8a99ad;
             margin-bottom: 20px;
         }
+        /* Estilos para os botões de filtro por secções */
+        .filter-container {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+        }
+        .filter-btn {
+            background-color: #161b22;
+            color: #c9d1d9;
+            border: 1px solid #30363d;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background-color 0.2s, border-color 0.2s;
+        }
+        .filter-btn:hover, .filter-btn.active {
+            background-color: #30363d;
+            border-color: #58a6ff;
+            color: #ffffff;
+        }
         /* Grelha responsiva adaptada a qualquer ecrã */
         .gallery-container {
             display: grid;
@@ -88,6 +111,14 @@
     <p>Trabalhos de captura e processamento com telescópio.</p>
     <p>Flávio da Silva</p>
 
+    <!-- Botões de navegação por categorias -->
+    <div class="filter-container">
+        <button class="filter-btn active" onclick="filtrarGaleria('todos', this)">Todos</button>
+        <button class="filter-btn" onclick="filtrarGaleria('ceu-profundo', this)">Céu Profundo</button>
+        <button class="filter-btn" onclick="filtrarGaleria('sistema-solar', this)">Sistema Solar / Lua</button>
+        <button class="filter-btn" onclick="filtrarGaleria('sol', this)">Sol</button>
+    </div>
+
     <div class="gallery-container" id="gallery"></div>
 
     <footer>
@@ -104,47 +135,69 @@
     </footer>
 
 <script>
-    // Lista de itens (imagens e vídeos) com legendas personalizadas seguras
+    // Lista de itens atualizada com categorias para organização futura
     const itensGaleria = [
-        // Céu profundo e rastos (fundo escuro)
-        { tipo: "imagem", caminho: "images/2026-10-29T21.46.26.png", legenda: "Nebulosa de Órion" },
-        { tipo: "imagem", caminho: "images/2026-10-29T21.46.38.png", legenda: "Detalhe de Céu Profundo" },
-        { tipo: "imagem", caminho: "images/IMG_20260616_232609.jpg", legenda: "Rastos de Estrelas (Star Trails)" },
-        { tipo: "imagem", caminho: "images/IMG_20260419_023636.jpg", legenda: "Rotação Estelar" },
-        { tipo: "imagem", caminho: "images/20250731_225930.jpg", legenda: "Captura Noturna" },
-        { tipo: "imagem", caminho: "images/Screenshot_20231019_163639_Facebook.jpg", legenda: "Jupiter" },
-        { tipo: "imagem", caminho: "images/Screenshot 2026-03-24 235314.png", legenda: "Processamento e Calibração" },
-        { tipo: "imagem", caminho: "images/Lua2.jpg", legenda: "Lua2" },
-        { tipo: "imagem", caminho: "images/FB_IMG_1697729740640.jpg", legenda: "Transito de Venus" },
+        // Céu profundo e rastos
+        { tipo: "imagem", caminho: "images/2026-10-29T21.46.26.png", legenda: "Nebulosa de Órion", categoria: "ceu-profundo" },
+        { tipo: "imagem", caminho: "images/2026-10-29T21.46.38.png", legenda: "Detalhe de Céu Profundo", categoria: "ceu-profundo" },
+        { tipo: "imagem", caminho: "images/IMG_20260616_232609.jpg", legenda: "Rastos de Estrelas (Star Trails)", categoria: "ceu-profundo" },
+        { tipo: "imagem", caminho: "images/IMG_20260419_023636.jpg", legenda: "Rotação Estelar", categoria: "ceu-profundo" },
+        { tipo: "imagem", caminho: "images/20250731_225930.jpg", legenda: "Captura Noturna", categoria: "ceu-profundo" },
         
-        // Imagens do Sol e discos brilhantes (no fim)
-        { tipo: "imagem", caminho: "images/Sol5.png", legenda: "Sol - Processamento" },
-        { tipo: "imagem", caminho: "images/Sol6.png", legenda: "Disco Solar Detalhado" },
-        { tipo: "imagem", caminho: "images/sol.1.jpg", legenda: "Observação Solar 1" },
-        { tipo: "imagem", caminho: "images/sol.3.jpg", legenda: "Observação Solar 3" },
-        { tipo: "imagem", caminho: "images/sol.3.png", legenda: "Análise do Sol" }
+        // Sistema Solar / Lua / Júpiter / Vénus
+        { tipo: "imagem", caminho: "images/Screenshot_20231019_163639_Facebook.jpg", legenda: "Jupiter", categoria: "sistema-solar" },
+        { tipo: "imagem", caminho: "images/Screenshot 2026-03-24 235314.png", legenda: "Processamento e Calibração", categoria: "sistema-solar" },
+        { tipo: "imagem", caminho: "images/Lua2.jpg", legenda: "Lua2", categoria: "sistema-solar" },
+        { tipo: "imagem", caminho: "images/FB_IMG_1697729740640.jpg", legenda: "Transito de Venus", categoria: "sistema-solar" },
+        
+        // Sol
+        { tipo: "imagem", caminho: "images/Sol5.png", legenda: "Sol - Processamento", categoria: "sol" },
+        { tipo: "imagem", caminho: "images/Sol6.png", legenda: "Disco Solar Detalhado", categoria: "sol" },
+        { tipo: "imagem", caminho: "images/sol.1.jpg", legenda: "Observação Solar 1", categoria: "sol" },
+        { tipo: "imagem", caminho: "images/sol.3.jpg", legenda: "Observação Solar 3", categoria: "sol" },
+        { tipo: "imagem", caminho: "images/sol.3.png", legenda: "Análise do Sol", categoria: "sol" }
     ];
 
     const gallery = document.getElementById("gallery");
 
-    itensGaleria.forEach(item => {
-        const card = document.createElement("div");
-        card.className = "card";
+    function renderizarGaleria(itens) {
+        gallery.innerHTML = "";
+        itens.forEach(item => {
+            const card = document.createElement("div");
+            card.className = "card";
 
-        let conteudoMedia = "";
-        if (item.tipo === "video") {
-            conteudoMedia = `<video src="${item.caminho}" controls autoplay loop muted playsinline></video>`;
+            let conteudoMedia = "";
+            if (item.tipo === "video") {
+                conteudoMedia = `<video src="${item.caminho}" controls autoplay loop muted playsinline></video>`;
+            } else {
+                conteudoMedia = `<img src="${item.caminho}" alt="Astrofotografia">`;
+            }
+
+            card.innerHTML = `
+                ${conteudoMedia}
+                <div class="card-title">${item.legenda}</div>
+            `;
+
+            gallery.appendChild(card);
+        });
+    }
+
+    // Função para filtrar os itens ao clicar nos botões
+    function filtrarGaleria(categoria, botao) {
+        // Atualiza o botão ativo visualmente
+        document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+        botao.classList.add('active');
+
+        if (categoria === 'todos') {
+            renderizarGaleria(itensGaleria);
         } else {
-            conteudoMedia = `<img src="${item.caminho}" alt="Astrofotografia">`;
+            const filtrados = itensGaleria.filter(item => item.categoria === categoria);
+            renderizarGaleria(filtrados);
         }
+    }
 
-        card.innerHTML = `
-            ${conteudoMedia}
-            <div class="card-title">${item.legenda}</div>
-        `;
-
-        gallery.appendChild(card);
-    });
+    // Carrega toda a galeria por defeito ao abrir a página
+    renderizarGaleria(itensGaleria);
 
     // Contador de visitas local fiável
     let visitas = localStorage.getItem('totalVisitas');
