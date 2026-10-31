@@ -65,11 +65,10 @@
             color: #8a99ad;
             font-size: 13px;
             border-top: 1px solid #30363d;
-        }
-        .contador {
-            margin-top: 8px;
-            font-size: 12px;
-            color: #58a6ff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
         }
     </style>
 </head>
@@ -83,8 +82,10 @@
 
     <footer>
         <div>&copy; 2026 Flávio da Silva. Todos os direitos reservados.</div>
-        <div class="contador">
-            Visualizações da página: <span id="contador-visitas">1</span>
+        
+        <!-- COLOCA AQUI O CÓDIGO DO FLAG COUNTER QUE COPIASTE -->
+        <div>
+            <a href="https://info.flagcounter.com/ftVs"><img src="https://s05.flagcounter.com/count2/ftVs/bg_FFFFFF/txt_000000/border_CCCCCC/columns_2/maxflags_10/viewers_3/labels_1/pageviews_1/flags_0/percent_0/" alt="Flag Counter" border="0"></a>
         </div>
     </footer>
 
@@ -130,16 +131,6 @@
 
         gallery.appendChild(card);
     });
-
-    // Contador de visitas fiável integrado
-    let visitas = localStorage.getItem('totalVisitas');
-    if (!visitas) {
-        visitas = 12; // Número base inicial
-    } else {
-        visitas = parseInt(visitas) + 1;
-    }
-    localStorage.setItem('totalVisitas', visitas);
-    document.getElementById('contador-visitas').innerText = visitas;
 </script>
 </body>
 </html>
