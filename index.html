@@ -81,38 +81,35 @@
     </footer>
 
 <script>
-    // Lista ordenada: primeiro as mais escuras (céu profundo e rastos) e depois as mais claras (sol)
+    // Podes alterar o texto de qualquer 'legenda' livremente sem nunca afetar o carregamento das fotos!
     const imagens = [
         // Céu profundo e rastos (fundo escuro)
-        "images/2026-10-29T21.46.26.png",
-        "images/2026-10-29T21.46.38.png",
-        "images/IMG_20260419_023636.jpg",
-        "images/IMG_20260616_232609.jpg",
-        "images/20250731_225930.jpg",
-        "images/Screenshot_20231019_163639_Facebook.jpg",
-        "images/Screenshot 2026-03-24 235314.png",
-        "images/FB_IMG_1697729740640.jpg",
+        { caminho: "images/2026-10-29T21.46.26.png", legenda: "Nebulosa de Órion" },
+        { caminho: "images/2026-10-29T21.46.38.png", legenda: "Detalhe de Céu Profundo" },
+        { caminho: "images/IMG_20260616_232609.jpg", legenda: "Rastos de Estrelas (Star Trails)" },
+        { caminho: "images/IMG_20260419_023636.jpg", legenda: "Rotação Estelar" },
+        { caminho: "images/20250731_225930.jpg", legenda: "Captura Noturna" },
+        { caminho: "images/Screenshot_20231019_163639_Facebook.jpg", legenda: "Registo Astronómico" },
+        { caminho: "images/Screenshot 2026-03-24 235314.png", legenda: "Processamento e Calibração" },
+        { caminho: "images/FB_IMG_1697729740640.jpg", legenda: "Registo de Astrofotografia" },
         
         // Imagens do Sol e discos brilhantes (no fim)
-        "images/Sol5.png",
-        "images/Sol6.png",
-        "images/sol.1.jpg",
-        "images/sol.3.jpg",
-        "images/sol.3.png"
+        { caminho: "images/Sol5.png", legenda: "Sol - Processamento" },
+        { caminho: "images/Sol6.png", legenda: "Disco Solar Detalhado" },
+        { caminho: "images/sol.1.jpg", legenda: "Observação Solar 1" },
+        { caminho: "images/sol.3.jpg", legenda: "Observação Solar 3" },
+        { caminho: "images/sol.3.png", legenda: "Análise do Sol" }
     ];
 
     const gallery = document.getElementById("gallery");
 
-    imagens.forEach(caminhoFicheiro => {
-        const nomeFicheiro = caminhoFicheiro.split('/').pop();
-        const nomeLimpo = nomeFicheiro.substring(0, nomeFicheiro.lastIndexOf('.')) || nomeFicheiro;
-
+    imagens.forEach(item => {
         const card = document.createElement("div");
         card.className = "card";
 
         card.innerHTML = `
-            <img src="${caminhoFicheiro}" alt="Astrofotografia">
-            <div class="card-title">${nomeLimpo}</div>
+            <img src="${item.caminho}" alt="Astrofotografia">
+            <div class="card-title">${item.legenda}</div>
         `;
 
         gallery.appendChild(card);
