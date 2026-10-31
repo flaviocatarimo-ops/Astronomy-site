@@ -19,8 +19,6 @@
             flex-direction: column;
             min-height: 100vh;
         }
-        
-        /* Cabeçalho */
         h1 {
             margin-bottom: 10px;
             font-size: 32px;
@@ -37,8 +35,6 @@
             font-size: 15px;
             font-weight: bold;
         }
-
-        /* Botões de Navegação / Filtro */
         .filter-container {
             display: flex;
             justify-content: center;
@@ -61,8 +57,6 @@
             border-color: #58a6ff;
             color: #ffffff;
         }
-
-        /* Secções e Grelhas */
         .section-title {
             text-align: left;
             max-width: 1200px;
@@ -90,7 +84,7 @@
             display: flex;
             flex-direction: column;
         }
-        .card img, .card video {
+        .card img {
             width: 100%;
             height: 200px;
             object-fit: cover;
@@ -102,8 +96,6 @@
             color: #c9d1d9;
             word-break: break-all;
         }
-
-        /* Rodapé */
         footer {
             margin-top: auto;
             padding-top: 50px;
@@ -134,7 +126,6 @@
     <div class="subtitle">Trabalhos de captura e processamento com telescópio.</div>
     <div class="author">Flávio da Silva</div>
 
-    <!-- Botões de navegação por categorias -->
     <div class="filter-container">
         <button class="filter-btn active" onclick="filtrarGaleria('todos', this)">Todos</button>
         <button class="filter-btn" onclick="filtrarGaleria('ceu-profundo', this)">Céu Profundo</button>
@@ -142,8 +133,102 @@
         <button class="filter-btn" onclick="filtrarGaleria('sol', this)">Sol</button>
     </div>
 
-    <!-- Conteúdo onde todas as secções/fotografias são renderizadas -->
     <div id="conteudo-principal"></div>
 
     <footer>
-        <div>&copy; 2026 Flávio da Silva
+        <div>&copy; 2026 Flávio da Silva. Todos os direitos reservados.</div>
+        <div class="counters-container">
+            <div>
+                <a href="https://info.flagcounter.com/ftVs"><img src="https://s05.flagcounter.com/count2/ftVs/bg_0B0F19/txt_FFFFFF/border_30363D/columns_2/maxflags_10/viewers_3/labels_1/pageviews_1/flags_0/percent_0/" alt="Flag Counter" border="0"></a>
+            </div>
+            <div class="contador">
+                Visualizações da página: <span id="contador-visitas">A carregar...</span>
+            </div>
+        </div>
+    </footer>
+
+<script>
+    const itensGaleria = [
+        { caminho: "images/2026-10-29T21.46.26.png", legenda: "Nebulosa de Órion", categoria: "ceu-profundo" },
+        { caminho: "images/2026-10-29T21.46.38.png", legenda: "Detalhe de Céu Profundo", categoria: "ceu-profundo" },
+        { caminho: "images/IMG_20260616_232609.jpg", legenda: "Rastos de Estrelas (Star Trails)", categoria: "ceu-profundo" },
+        { caminho: "images/IMG_20260419_023636.jpg", legenda: "Rotação Estelar", categoria: "ceu-profundo" },
+        
+        { caminho: "images/20250731_225930.jpg", legenda: "Captura Noturna", categoria: "sistema-solar" },
+        { caminho: "images/Screenshot_20231019_163639_Facebook.jpg", legenda: "Jupiter", categoria: "sistema-solar" },
+        { caminho: "images/Screenshot 2026-03-24 235314.png", legenda: "Processamento e Calibração", categoria: "sistema-solar" },
+        { caminho: "images/Lua2.jpg", legenda: "Lua2", categoria: "sistema-solar" },
+        { caminho: "images/FB_IMG_1697729740640.jpg", legenda: "Transito de Venus", categoria: "sistema-solar" },
+        
+        { caminho: "images/Sol5.png", legenda: "Sol - Processamento", categoria: "sol" },
+        { caminho: "images/Sol6.png", legenda: "Disco Solar Detalhado", categoria: "sol" },
+        { caminho: "images/sol.1.jpg", legenda: "Observação Solar 1", categoria: "sol" },
+        { caminho: "images/sol.3.jpg", legenda: "Observação Solar 2", categoria: "sol" },
+        { caminho: "images/sol.3.png", legenda: "Análise do Sol", categoria: "sol" }
+    ];
+
+    const containerPrincipal = document.getElementById("conteudo-principal");
+
+    function criarSecao(titulo, itens) {
+        if (itens.length === 0) return "";
+        let htmlCards = '';
+        itens.forEach(item => {
+            htmlCards += `
+                <div class="card">
+                    <img src="${item.caminho}" alt="${item.legenda}">
+                    <div class="card-title">${item.legenda}</div>
+                </div>
+            `;
+        });
+        return `
+            <div class="section-title">${titulo}</div>
+            <div class="gallery-container">${htmlCards}</div>
+        `;
+    }
+
+    function renderizarGaleria(filtro) {
+        containerPrincipal.innerHTML = "";
+        const ceuProfundo = itensGaleria.filter(i => i.categoria === 'ceu-profundo');
+        const sistemaSolar = itensGaleria.filter(i => i.categoria === 'sistema-solar');
+        const sol = itensGaleria.filter(i => i.categoria === 'sol');
+
+        if (filtro === 'todos') {
+            containerPrincipal.innerHTML += criarSecao("🌌 Céu Profundo", ceuProfundo);
+            containerPrincipal.innerHTML += criarSecao("🪐 Sistema Solar / Lua", sistemaSolar);
+            containerPrincipal.innerHTML += criarSecao("☀️ Sol", sol);
+        } else if (filtro === 'ceu-profundo') {
+            containerPrincipal.innerHTML += criarSecao("🌌 Céu Profundo", ceuProfundo);
+        } else if (filtro === 'sistema-solar') {
+            containerPrincipal.innerHTML += criarSecao("🪐 Sistema Solar / Lua", sistemaSolar);
+        } else if (filtro === 'sol') {
+            containerPrincipal.innerHTML += criarSecao("☀️ Sol", sol);
+        }
+    }
+
+    function filtrarGaleria(categoria, botao) {
+        document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+        botao.classList.add('active');
+        renderizarGaleria(categoria);
+    }
+
+    renderizarGaleria('todos');
+
+    const jaVisitou = localStorage.getItem('siteVisitadoPorMim');
+    const endpointContador = jaVisitou 
+        ? 'https://api.counterapi.dev/v1/flaviocatarimo-ops/astronomy-site' 
+        : 'https://api.counterapi.dev/v1/flaviocatarimo-ops/astronomy-site/hit';
+
+    fetch(endpointContador)
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById('contador-visitas').innerText = data.count || data.value || "1";
+            if (!jaVisitou) {
+                localStorage.setItem('siteVisitadoPorMim', 'true');
+            }
+        })
+        .catch(error => {
+            document.getElementById('contador-visitas').innerText = "1";
+        });
+</script>
+</body>
+</html>
