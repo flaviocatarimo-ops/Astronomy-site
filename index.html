@@ -35,12 +35,12 @@
             font-weight: bold;
         }
 
-        /* Botões de Filtro (agora no topo) */
+        /* Botões de Filtro */
         .filter-container {
             display: flex;
             justify-content: center;
             gap: 10px;
-            margin-bottom: 25px;
+            margin-bottom: 20px;
             flex-wrap: wrap;
         }
         .filter-btn {
@@ -58,8 +58,18 @@
             border-color: #58a6ff;
             color: #ffffff;
         }
+
+        /* Texto de Introdução na Página Inicial */
+        .intro-text {
+            max-width: 700px;
+            margin: 0 auto 25px auto;
+            color: #8a99ad;
+            font-size: 14px;
+            line-height: 1.6;
+            padding: 0 15px;
+        }
         
-        /* Destaque Principal Compacto e Elegante (agora abaixo dos botões) */
+        /* Destaque Principal Compacto e Elegante */
         .featured-container {
             max-width: 600px;
             margin: 0 auto 30px auto;
@@ -154,7 +164,7 @@
     <div class="subtitle">Trabalhos de captura e processamento com telescópio.</div>
     <div class="author">Flávio da Silva</div>
 
-    <!-- Botões de navegação por categorias (agora no topo) -->
+    <!-- Botões de navegação por categorias -->
     <div class="filter-container">
         <button class="filter-btn active" onclick="filtrarGaleria('todos', this)">Início</button>
         <button class="filter-btn" onclick="filtrarGaleria('ceu-profundo', this)">Céu Profundo</button>
@@ -162,7 +172,12 @@
         <button class="filter-btn" onclick="filtrarGaleria('sol', this)">Sol</button>
     </div>
 
-    <!-- Destaque Principal (agora logo abaixo dos botões) -->
+    <!-- Texto de Introdução para as outras páginas -->
+    <div id="intro-home" class="intro-text">
+        Bem-vindo à minha página de astrofotografia. Aqui partilho o resultado de várias noites de observação e processamento astronómico com telescópio. Utilize os botões acima para explorar as diferentes categorias: desde nebulosas distantes e rastos estelares no <strong>Céu Profundo</strong>, passando pelos planetas e crateras do <strong>Sistema Solar / Lua</strong>, até aos detalhes da coroa e manchas na superfície do <strong>Sol</strong>.
+    </div>
+
+    <!-- Destaque Principal -->
     <div id="destaque-home" class="featured-container">
         <img src="images/2026-10-29T21.46.26.png" alt="Destaque Principal" class="featured-image">
         <div class="featured-caption">✨ Imagem em Destaque: Nebulosa de Órion</div>
@@ -209,6 +224,7 @@
 
     const containerPrincipal = document.getElementById("conteudo-principal");
     const blocoDestaque = document.getElementById("destaque-home");
+    const blocoIntro = document.getElementById("intro-home");
 
     function criarSecao(titulo, itens) {
         if (itens.length === 0) return "";
@@ -239,10 +255,12 @@
         const sol = itensGaleria.filter(i => i.categoria === 'sol');
 
         if (filtro === 'todos') {
-            // No Início, mostra o destaque e oculta as grelhas completas
+            // No Início, mostra o texto de introdução e a imagem de destaque
+            blocoIntro.style.display = "block";
             blocoDestaque.style.display = "block";
         } else {
-            // Quando escolhe uma categoria, esconde o destaque grande para dar protagonismo total à categoria escolhida
+            // Quando clica numa categoria, oculta a introdução e o destaque da home para mostrar apenas os trabalhos da categoria
+            blocoIntro.style.display = "none";
             blocoDestaque.style.display = "none";
 
             if (filtro === 'ceu-profundo') {
@@ -261,7 +279,7 @@
         renderizarGaleria(categoria);
     }
 
-    // Arranque inicial
+    // Arranque inicial na página de Início
     renderizarGaleria('todos');
 
     // Contador inteligente global
