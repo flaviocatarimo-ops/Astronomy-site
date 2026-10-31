@@ -5,6 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Minha Galeria de Astrofotografia</title>
     <style>
+        /* Configuração universal para compatibilidade em todos os navegadores e telemóveis */
+        * {
+            box-sizing: border-box;
+        }
         body {
             font-family: Arial, sans-serif;
             background-color: #0b0f19;
@@ -18,17 +22,20 @@
         }
         h1 {
             margin-bottom: 5px;
+            font-size: 24px;
         }
         p {
             color: #8a99ad;
-            margin-bottom: 30px;
+            margin-bottom: 20px;
         }
+        /* Grelha responsiva adaptada a qualquer ecrã */
         .gallery-container {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
             gap: 20px;
             max-width: 1200px;
             margin: 0 auto;
+            width: 100%;
             flex: 1;
         }
         .card {
@@ -44,6 +51,7 @@
             width: 100%;
             height: 200px;
             object-fit: cover;
+            display: block;
         }
         .card-title {
             padding: 15px;
@@ -64,39 +72,39 @@
 
     <h1>Minha Galeria de Astrofotografia</h1>
     <p>Trabalhos de captura e processamento com telescópio.</p>
-    <p><b>Flávio Silva</b></p>
+    <p>Flávio da Silva</p>
 
     <div class="gallery-container" id="gallery"></div>
 
     <footer>
-        &copy; 2026 Flávio Silva. Todos os direitos reservados.
+        &copy; 2026 Flávio da Silva. Todos os direitos reservados.
     </footer>
 
 <script>
-    // Lista com os caminhos dos ficheiros na pasta images
+    // Lista ordenada: primeiro as mais escuras (céu profundo e rastos) e depois as mais claras (sol)
     const imagens = [
+        // Céu profundo e rastos (fundo escuro)
         "images/2026-10-29T21.46.26.png",
         "images/2026-10-29T21.46.38.png",
+        "images/IMG_20260616_232609.jpg",
+        "images/IMG_20260419_023636.jpg",
+        "images/20250731_225930.jpg",
+        "images/Screenshot_20231019_163639_Facebook.jpg",
+        "images/Screenshot 2026-03-24 235314.png",
         "images/FB_IMG_1697729740640.jpg",
+        
+        // Imagens do Sol e discos brilhantes (no fim)
         "images/Sol5.png",
         "images/Sol6.png",
         "images/sol.1.jpg",
         "images/sol.3.jpg",
-        "images/sol.3.png",
-        "images/IMG_20260616_232609.jpg",
-        "images/IMG_20260419_023636.jpg",
-        "images/Screenshot_20231019_163639_Facebook.jpg",
-        "images/Screenshot 2026-03-24 235314.png",
-        "images/20250731_225930.jpg"
+        "images/sol.3.png"
     ];
 
     const gallery = document.getElementById("gallery");
 
     imagens.forEach(caminhoFicheiro => {
-        // Extrai apenas o nome do ficheiro (ex: "sol.1.jpg")
         const nomeFicheiro = caminhoFicheiro.split('/').pop();
-        
-        // Retira a extensão do ficheiro para criar uma legenda limpa
         const nomeLimpo = nomeFicheiro.substring(0, nomeFicheiro.lastIndexOf('.')) || nomeFicheiro;
 
         const card = document.createElement("div");
