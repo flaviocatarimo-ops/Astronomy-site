@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Minha Galeria de Astrofotografia</title>
     <style>
-        /* Configuração universal para compatibilidade em todos os navegadores e telemóveis */
         * {
             box-sizing: border-box;
         }
@@ -22,44 +21,51 @@
         }
         h1 {
             margin-bottom: 5px;
-            font-size: 24px;
+            font-size: 28px;
         }
-        p {
+        .subtitle {
             color: #8a99ad;
-            margin-bottom: 20px;
+            margin-bottom: 5px;
+            font-size: 16px;
+        }
+        .author {
+            color: #58a6ff;
+            margin-bottom: 25px;
+            font-size: 15px;
+            font-weight: bold;
         }
         
-        /* Estilo para o Destaque Principal (Hero Section) */
+        /* Destaque Principal Compacto e Equilibrado */
         .featured-container {
-            max-width: 800px;
+            max-width: 600px;
             margin: 0 auto 30px auto;
             background-color: #161b22;
             border: 1px solid #30363d;
             border-radius: 10px;
             overflow: hidden;
-            box-shadow: 0 6px 12px rgba(0,0,0,0.4);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.4);
         }
         .featured-image {
             width: 100%;
-            height: 350px;
+            height: 260px;
             object-fit: cover;
             display: block;
         }
         .featured-caption {
-            padding: 15px;
-            font-size: 16px;
+            padding: 12px;
+            font-size: 14px;
             color: #58a6ff;
             font-weight: bold;
             background-color: #161b22;
             border-top: 1px solid #30363d;
         }
 
-        /* Estilos para os botões de filtro por secções */
+        /* Botões de Filtro */
         .filter-container {
             display: flex;
             justify-content: center;
             gap: 10px;
-            margin-bottom: 25px;
+            margin-bottom: 30px;
             flex-wrap: wrap;
         }
         .filter-btn {
@@ -77,7 +83,18 @@
             border-color: #58a6ff;
             color: #ffffff;
         }
-        /* Grelha responsiva adaptada a qualquer ecrã */
+
+        /* Secções e Grelhas */
+        .section-title {
+            text-align: left;
+            max-width: 1200px;
+            margin: 30px auto 15px auto;
+            font-size: 18px;
+            color: #58a6ff;
+            border-bottom: 1px solid #30363d;
+            padding-bottom: 6px;
+            padding-left: 5px;
+        }
         .gallery-container {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -85,7 +102,6 @@
             max-width: 1200px;
             margin: 0 auto;
             width: 100%;
-            flex: 1;
         }
         .card {
             background-color: #161b22;
@@ -108,8 +124,9 @@
             color: #c9d1d9;
             word-break: break-all;
         }
+
         footer {
-            margin-top: 40px;
+            margin-top: 50px;
             padding: 20px;
             color: #8a99ad;
             font-size: 13px;
@@ -134,13 +151,13 @@
 <body>
 
     <h1>Minha Galeria de Astrofotografia</h1>
-    <p>Trabalhos de captura e processamento com telescópio.</p>
-    <p>Flávio da Silva</p>
+    <div class="subtitle">Trabalhos de captura e processamento com telescópio.</div>
+    <div class="author">Flávio da Silva</div>
 
-    <!-- Secção de Destaque Principal (Evita excesso de peso visual imediato na página) -->
+    <!-- Destaque Principal Reduzido e Elegante -->
     <div class="featured-container">
         <img src="images/2026-10-29T21.46.26.png" alt="Destaque Principal" class="featured-image">
-        <div class="featured-caption">✨ Destaque em Destaque: Nebulosa de Órion</div>
+        <div class="featured-caption">✨ Imagem em Destaque: Nebulosa de Órion</div>
     </div>
 
     <!-- Botões de navegação por categorias -->
@@ -151,7 +168,8 @@
         <button class="filter-btn" onclick="filtrarGaleria('sol', this)">Sol</button>
     </div>
 
-    <div class="gallery-container" id="gallery"></div>
+    <!-- Conteúdo Dinâmico Organizado -->
+    <div id="conteudo-principal"></div>
 
     <footer>
         <div>&copy; 2026 Flávio da Silva. Todos os direitos reservados.</div>
@@ -167,22 +185,21 @@
     </footer>
 
 <script>
-    // Lista de itens devidamente organizada e categorizada
     const itensGaleria = [
-        // 1. Céu Profundo (Nebulosas e Rastos Estelares)
+        // Céu Profundo
         { tipo: "imagem", caminho: "images/2026-10-29T21.46.26.png", legenda: "Nebulosa de Órion", categoria: "ceu-profundo" },
         { tipo: "imagem", caminho: "images/2026-10-29T21.46.38.png", legenda: "Detalhe de Céu Profundo", categoria: "ceu-profundo" },
         { tipo: "imagem", caminho: "images/IMG_20260616_232609.jpg", legenda: "Rastos de Estrelas (Star Trails)", categoria: "ceu-profundo" },
         { tipo: "imagem", caminho: "images/IMG_20260419_023636.jpg", legenda: "Rotação Estelar", categoria: "ceu-profundo" },
         
-        // 2. Sistema Solar / Lua (Planetas, Trânsitos e Luas)
+        // Sistema Solar / Lua
         { tipo: "imagem", caminho: "images/20250731_225930.jpg", legenda: "Captura Noturna", categoria: "sistema-solar" },
         { tipo: "imagem", caminho: "images/Screenshot_20231019_163639_Facebook.jpg", legenda: "Jupiter", categoria: "sistema-solar" },
         { tipo: "imagem", caminho: "images/Screenshot 2026-03-24 235314.png", legenda: "Processamento e Calibração", categoria: "sistema-solar" },
         { tipo: "imagem", caminho: "images/Lua2.jpg", legenda: "Lua2", categoria: "sistema-solar" },
         { tipo: "imagem", caminho: "images/FB_IMG_1697729740640.jpg", legenda: "Transito de Venus", categoria: "sistema-solar" },
         
-        // 3. Sol (Discos solares e análises)
+        // Sol
         { tipo: "imagem", caminho: "images/Sol5.png", legenda: "Sol - Processamento", categoria: "sol" },
         { tipo: "imagem", caminho: "images/Sol6.png", legenda: "Disco Solar Detalhado", categoria: "sol" },
         { tipo: "imagem", caminho: "images/sol.1.jpg", legenda: "Observação Solar 1", categoria: "sol" },
@@ -190,49 +207,59 @@
         { tipo: "imagem", caminho: "images/sol.3.png", legenda: "Análise do Sol", categoria: "sol" }
     ];
 
-    const gallery = document.getElementById("gallery");
+    const containerPrincipal = document.getElementById("conteudo-principal");
 
-    function renderizarGaleria(itens) {
-        gallery.innerHTML = "";
+    function criarSecao(titulo, itens) {
+        if (itens.length === 0) return "";
+        
+        let htmlCards = '';
         itens.forEach(item => {
-            const card = document.createElement("div");
-            card.className = "card";
-
-            let conteudoMedia = "";
-            if (item.tipo === "video") {
-                conteudoMedia = `<video src="${item.caminho}" controls autoplay loop muted playsinline></video>`;
-            } else {
-                conteudoMedia = `<img src="${item.caminho}" alt="Astrofotografia">`;
-            }
-
-            card.innerHTML = `
-                ${conteudoMedia}
-                <div class="card-title">${item.legenda}</div>
+            htmlCards += `
+                <div class="card">
+                    <img src="${item.caminho}" alt="Astrofotografia">
+                    <div class="card-title">${item.legenda}</div>
+                </div>
             `;
-
-            gallery.appendChild(card);
         });
+
+        return `
+            <div class="section-title">${titulo}</div>
+            <div class="gallery-container">
+                ${htmlCards}
+            </div>
+        `;
     }
 
-    // Função para filtrar os itens ao clicar nos botões
-    function filtrarGaleria(categoria, botao) {
-        document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
-        botao.classList.add('active');
+    function renderizarGaleria(filtro) {
+        containerPrincipal.innerHTML = "";
 
-        if (categoria === 'todos') {
-            renderizarGaleria(itensGaleria);
-        } else {
-            const filtrados = itensGaleria.filter(item => item.categoria === categoria);
-            renderizarGaleria(filtrados);
+        const ceuProfundo = itensGaleria.filter(i => i.categoria === 'ceu-profundo');
+        const sistemaSolar = itensGaleria.filter(i => i.categoria === 'sistema-solar');
+        const sol = itensGaleria.filter(i => i.categoria === 'sol');
+
+        if (filtro === 'todos') {
+            containerPrincipal.innerHTML += criarSecao("🌌 Céu Profundo", ceuProfundo);
+            containerPrincipal.innerHTML += criarSecao("🪐 Sistema Solar / Lua", sistemaSolar);
+            containerPrincipal.innerHTML += criarSecao("☀️ Sol", sol);
+        } else if (filtro === 'ceu-profundo') {
+            containerPrincipal.innerHTML += criarSecao("🌌 Céu Profundo", ceuProfundo);
+        } else if (filtro === 'sistema-solar') {
+            containerPrincipal.innerHTML += criarSecao("🪐 Sistema Solar / Lua", sistemaSolar);
+        } else if (filtro === 'sol') {
+            containerPrincipal.innerHTML += criarSecao("☀️ Sol", sol);
         }
     }
 
-    // Carrega toda a galeria por defeito ao abrir a página
-    renderizarGaleria(itensGaleria);
+    function filtrarGaleria(categoria, botao) {
+        document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+        botao.classList.add('active');
+        renderizarGaleria(categoria);
+    }
 
-    // Sistema Inteligente de Contagem Global sem inflacionar as tuas próprias visitas neste dispositivo
+    renderizarGaleria('todos');
+
+    // Contador inteligente global
     const jaVisitou = localStorage.getItem('siteVisitadoPorMim');
-    
     const endpointContador = jaVisitou 
         ? 'https://api.counterapi.dev/v1/flaviocatarimo-ops/astronomy-site' 
         : 'https://api.counterapi.dev/v1/flaviocatarimo-ops/astronomy-site/hit';
