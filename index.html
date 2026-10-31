@@ -47,7 +47,7 @@
             display: flex;
             flex-direction: column;
         }
-        .card img {
+        .card img, .card video {
             width: 100%;
             height: 200px;
             object-fit: cover;
@@ -81,39 +81,42 @@
     </footer>
 
 <script>
-    // Podes alterar o texto de qualquer 'legenda' livremente sem nunca afetar o carregamento das fotos!
-    const imagens = [
+    // Lista de itens (imagens e vídeos) com legendas personalizadas seguras
+    const itensGaleria = [
         // Céu profundo e rastos (fundo escuro)
-        { caminho: "images/2026-10-29T21.46.26.png", legenda: "Nebulosa de Órion" },
-        { caminho: "images/2026-10-29T21.46.38.png", legenda: "Detalhe de Céu Profundo" },
-        { caminho: "images/IMG_20260616_232609.jpg", legenda: "Rastos de Estrelas (Star Trails)" },
-        { caminho: "images/IMG_20260419_023636.jpg", legenda: "Rotação Estelar" },
-        { caminho: "images/20250731_225930.jpg", legenda:, "Captura Noturna" },
-        { caminho: "images/Screenshot_20231019_163639_Facebook.jpg", legenda: "Jupiter" },
-        { caminho: "images/Screenshot 2026-03-24 235314.png", legenda: "Processamento e Calibração" },
-        { caminho:  "images/Lua2.jpg" , legenda: "Lua2" },
-        { caminho: "images/FB_IMG_1697729740640.jpg", legenda: "Transito de Venus" },
-
-        
-      
-    
+        { tipo: "imagem", caminho: "images/2026-10-29T21.46.26.png", legenda: "Nebulosa de Órion" },
+        { tipo: "imagem", caminho: "images/2026-10-29T21.46.38.png", legenda: "Detalhe de Céu Profundo" },
+        { tipo: "imagem", caminho: "images/IMG_20260616_232609.jpg", legenda: "Rastos de Estrelas (Star Trails)" },
+        { tipo: "imagem", caminho: "images/IMG_20260419_023636.jpg", legenda: "Rotação Estelar" },
+        { tipo: "imagem", caminho: "images/20250731_225930.jpg", legenda: "Captura Noturna" },
+        { tipo: "imagem", caminho: "images/Screenshot_20231019_163639_Facebook.jpg", legenda: "Jupiter" },
+        { tipo: "imagem", caminho: "images/Screenshot 2026-03-24 235314.png", legenda: "Processamento e Calibração" },
+        { tipo: "imagem", caminho: "images/Lua2.jpg", legenda: "Lua2" },
+        { tipo: "imagem", caminho: "images/FB_IMG_1697729740640.jpg", legenda: "Transito de Venus" },
         
         // Imagens do Sol e discos brilhantes (no fim)
-        { caminho: "images/Sol5.png", legenda: "Sol - Processamento" },
-        { caminho: "images/Sol6.png", legenda: "Disco Solar Detalhado" },
-        { caminho: "images/sol.1.jpg", legenda: "Observação Solar 1" },
-        { caminho: "images/sol.3.jpg", legenda: "Observação Solar 3" },
-        { caminho: "images/sol.3.png", legenda: "Análise do Sol" },
+        { tipo: "imagem", caminho: "images/Sol5.png", legenda: "Sol - Processamento" },
+        { tipo: "imagem", caminho: "images/Sol6.png", legenda: "Disco Solar Detalhado" },
+        { tipo: "imagem", caminho: "images/sol.1.jpg", legenda: "Observação Solar 1" },
+        { tipo: "imagem", caminho: "images/sol.3.jpg", legenda: "Observação Solar 3" },
+        { tipo: "imagem", caminho: "images/sol.3.png", legenda: "Análise do Sol" }
     ];
 
     const gallery = document.getElementById("gallery");
 
-    imagens.forEach(item => {
+    itensGaleria.forEach(item => {
         const card = document.createElement("div");
         card.className = "card";
 
+        let conteudoMedia = "";
+        if (item.tipo === "video") {
+            conteudoMedia = `<video src="${item.caminho}" controls autoplay loop muted playsinline></video>`;
+        } else {
+            conteudoMedia = `<img src="${item.caminho}" alt="Astrofotografia">`;
+        }
+
         card.innerHTML = `
-            <img src="${item.caminho}" alt="Astrofotografia">
+            ${conteudoMedia}
             <div class="card-title">${item.legenda}</div>
         `;
 
