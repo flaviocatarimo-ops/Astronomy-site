@@ -20,12 +20,12 @@
             min-height: 100vh;
         }
         h1 {
-            margin-bottom: 5px;
+            margin-bottom: 8px;
             font-size: 28px;
         }
         .subtitle {
             color: #8a99ad;
-            margin-bottom: 5px;
+            margin-bottom: 6px;
             font-size: 16px;
         }
         .author {
@@ -35,19 +35,19 @@
             font-weight: bold;
         }
 
-        /* Botões de Filtro */
+        /* Botões de Filtro com mais espaço em baixo */
         .filter-container {
             display: flex;
             justify-content: center;
-            gap: 10px;
-            margin-bottom: 25px;
+            gap: 12px;
+            margin-bottom: 30px;
             flex-wrap: wrap;
         }
         .filter-btn {
             background-color: #161b22;
             color: #c9d1d9;
             border: 1px solid #30363d;
-            padding: 8px 16px;
+            padding: 9px 18px;
             border-radius: 6px;
             cursor: pointer;
             font-size: 14px;
@@ -59,20 +59,20 @@
             color: #ffffff;
         }
 
-        /* Texto de Introdução com letras maiores e mais legíveis */
+        /* Texto de Introdução mais largo, espaçado e confortável de ler */
         .intro-text {
-            max-width: 750px;
-            margin: 0 auto 30px auto;
+            max-width: 850px;
+            margin: 0 auto 35px auto;
             color: #c9d1d9;
             font-size: 16px;
-            line-height: 1.7;
-            padding: 0 15px;
+            line-height: 1.8;
+            padding: 0 20px;
         }
         
         /* Destaque Principal Compacto e Elegante */
         .featured-container {
             max-width: 600px;
-            margin: 0 auto 30px auto;
+            margin: 0 auto 40px auto;
             background-color: #161b22;
             border: 1px solid #30363d;
             border-radius: 10px;
@@ -172,7 +172,7 @@
         <button class="filter-btn" onclick="filtrarGaleria('sol', this)">Sol</button>
     </div>
 
-    <!-- Texto de Introdução com letra maior e melhor contraste -->
+    <!-- Texto de Introdução com mais largura e espaçamento entre linhas -->
     <div id="intro-home" class="intro-text">
         Bem-vindo à minha página de astrofotografia. Aqui partilho o resultado de várias noites de observação e processamento astronómico com telescópio. Utilize os botões acima para explorar as diferentes categorias: desde nebulosas distantes e rastos estelares no <strong>Céu Profundo</strong>, passando pelos planetas e crateras do <strong>Sistema Solar / Lua</strong>, até aos detalhes da coroa e manchas na superfície do <strong>Sol</strong>.
     </div>
@@ -290,7 +290,7 @@
         .then(data => {
             document.getElementById('contador-visitas').innerText = data.count || data.value || "1";
             if (!jaVisitou) {
-                localStorage.setItem('siteVisitadoPorNum', 'true');
+                localStorage.setItem('siteVisitadoPorMim', 'true');
             }
         })
         .catch(error => {
