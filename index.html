@@ -20,22 +20,28 @@
             flex-direction: column;
             min-height: 100vh;
         }
+        
+        /* Cabeçalho Destacado */
+        header {
+            margin-bottom: 35px;
+        }
         h1 {
-            margin-bottom: 10px;
-            font-size: 32px;
+            margin: 0 0 10px 0;
+            font-size: 42px; /* Título maior */
             letter-spacing: 0.5px;
+            color: #ffffff;
         }
         .subtitle {
-            color: #8a99ad;
-            margin-bottom: 8px;
-            font-size: 16px;
-        }
-        .author {
-            color: #58a6ff;
-            margin-bottom: 30px;
-            font-size: 15px;
+            color: #58a6ff; /* Cor em destaque logo abaixo do título */
+            margin: 0 0 8px 0;
+            font-size: 18px;
             font-weight: bold;
         }
+        .author {
+            color: #8a99ad;
+            font-size: 14px;
+        }
+
         .filter-container {
             display: flex;
             justify-content: center;
@@ -199,9 +205,12 @@
 </head>
 <body>
 
-    <h1>Minha Galeria de Astrofotografia</h1>
-    <div class="subtitle">Trabalhos de captura e processamento com telescópio.</div>
-    <div class="author">Flávio da Silva</div>
+    <!-- Cabeçalho reorganizado com título maior e descrição logo abaixo -->
+    <header>
+        <h1>Minha Galeria de Astrofotografia</h1>
+        <div class="subtitle">Trabalhos de captura e processamento com telescópio.</div>
+        <div class="author">Flávio da Silva</div>
+    </header>
 
     <div class="filter-container">
         <button class="filter-btn active" onclick="filtrarGaleria('todos', this)">Todos</button>
