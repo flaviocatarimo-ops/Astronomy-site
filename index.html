@@ -4,6 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Minha Galeria de Astrofotografia</title>
+    <!-- Ícone para o navegador e atalhos no telemóvel -->
+    <link rel="icon" type="image/png" href="images/icone-site.png">
+    <link rel="apple-touch-icon" href="images/icone-site.png">
+    
     <style>
         * {
             box-sizing: border-box;
@@ -96,9 +100,48 @@
             color: #c9d1d9;
             word-break: break-all;
         }
+
+        /* Caixa de Contacto Estilizada */
+        .contact-box {
+            background-color: #161b22;
+            border: 1px solid #30363d;
+            border-radius: 8px;
+            padding: 20px;
+            max-width: 450px;
+            margin: 0 auto 30px auto;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+        }
+        .contact-box h3 {
+            margin-top: 0;
+            color: #58a6ff;
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+        .contact-box p {
+            color: #c9d1d9;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+        .email-link {
+            display: inline-block;
+            background-color: #21262d;
+            color: #58a6ff;
+            border: 1px solid #30363d;
+            padding: 8px 16px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: bold;
+            transition: background-color 0.2s;
+        }
+        .email-link:hover {
+            background-color: #30363d;
+            color: #ffffff;
+        }
+
         footer {
             margin-top: auto;
-            padding-top: 50px;
+            padding-top: 40px;
             padding-bottom: 20px;
             color: #8a99ad;
             font-size: 13px;
@@ -126,6 +169,13 @@
     <div id="conteudo-principal"></div>
 
     <footer>
+        <!-- Caixinha de Contacto -->
+        <div class="contact-box">
+            <h3>📬 Contacto</h3>
+            <p>Tens alguma questão sobre as capturas ou equipamento? Entra em contacto:</p>
+            <a href="mailto:flaviocatarimo@gmail.com" class="email-link">📧 Enviar Email</a>
+        </div>
+
         <div>&copy; 2026 Flávio da Silva. Todos os direitos reservados.</div>
         <div>
             <a href="https://info.flagcounter.com/ftVs"><img src="https://s05.flagcounter.com/count2/ftVs/bg_0B0F19/txt_FFFFFF/border_30363D/columns_2/maxflags_10/viewers_3/labels_1/pageviews_1/flags_0/percent_0/" alt="Flag Counter" border="0"></a>
