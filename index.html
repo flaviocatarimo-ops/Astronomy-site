@@ -93,12 +93,59 @@
             height: 200px;
             object-fit: cover;
             display: block;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        .card img:hover {
+            transform: scale(1.03); /* Leve zoom ao passar o rato */
         }
         .card-title {
             padding: 15px;
             font-size: 14px;
             color: #c9d1d9;
             word-break: break-all;
+        }
+
+        /* Estilo do Modal (Lightbox para ampliar a imagem) */
+        .modal {
+            display: none; /* Oculto por defeito */
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            padding: 20px;
+        }
+        .modal-content {
+            max-width: 90%;
+            max-height: 80vh;
+            border-radius: 8px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.7);
+            object-fit: contain;
+        }
+        .modal-caption {
+            margin-top: 15px;
+            color: #ffffff;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        .close-modal {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: #ffffff;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+        .close-modal:hover {
+            color: #58a6ff;
         }
 
         /* Caixa de Contacto Estilizada */
@@ -168,85 +215,18 @@
 
     <div id="conteudo-principal"></div>
 
+    <!-- Janela Modal (Lightbox para ampliar a imagem) -->
+    <div id="lightboxModal" class="modal" onclick="fecharModal()">
+        <span class="close-modal" onclick="fecharModal()">&times;</span>
+        <img class="modal-content" id="imgAmpliada">
+        <div class="modal-caption" id="legendaAmpliada"></div>
+    </div>
+
     <footer>
-        <!-- Caixinha de Contacto -->
         <div class="contact-box">
             <h3>📬 Contacto</h3>
             <p>Tens alguma questão sobre as capturas ou equipamento? Entra em contacto:</p>
-            <a href="mailto:flaviocatarimo@gmail.com" class="email-link">📧 Enviar Email</a>
+            <a href="mailto:o_teu_email@exemplo.com" class="email-link">📧 Enviar Email</a>
         </div>
 
-        <div>&copy; 2026 Flávio da Silva. Todos os direitos reservados.</div>
-        <div>
-            <a href="https://info.flagcounter.com/ftVs"><img src="https://s05.flagcounter.com/count2/ftVs/bg_0B0F19/txt_FFFFFF/border_30363D/columns_2/maxflags_10/viewers_3/labels_1/pageviews_1/flags_0/percent_0/" alt="Flag Counter" border="0"></a>
-        </div>
-    </footer>
-
-<script>
-    const itensGaleria = [
-        { caminho: "images/2026-10-29T21.46.26.png", legenda: "Nebulosa de Órion", categoria: "ceu-profundo" },
-        { caminho: "images/2026-10-29T21.46.38.png", legenda: "Detalhe de Céu Profundo", categoria: "ceu-profundo" },
-        { caminho: "images/IMG_20260616_232609.jpg", legenda: "Rastos de Estrelas (Star Trails)", categoria: "ceu-profundo" },
-        { caminho: "images/IMG_20260419_023636.jpg", legenda: "Rotação Estelar", categoria: "ceu-profundo" },
-        
-        { caminho: "images/20250731_225930.jpg", legenda: "Captura Noturna", categoria: "sistema-solar" },
-        { caminho: "images/Screenshot_20231019_163639_Facebook.jpg", legenda: "Jupiter", categoria: "sistema-solar" },
-        { caminho: "images/Screenshot 2026-03-24 235314.png", legenda: "Processamento e Calibração", categoria: "sistema-solar" },
-        { caminho: "images/Lua2.jpg", legenda: "Lua2", categoria: "sistema-solar" },
-        { caminho: "images/FB_IMG_1697729740640.jpg", legenda: "Transito de Venus", categoria: "sistema-solar" },
-        
-        { caminho: "images/Sol5.png", legenda: "Sol - Processamento", categoria: "sol" },
-        { caminho: "images/Sol6.png", legenda: "Disco Solar Detalhado", categoria: "sol" },
-        { caminho: "images/sol.1.jpg", legenda: "Observação Solar 1", categoria: "sol" },
-        { caminho: "images/sol.3.jpg", legenda: "Observação Solar 2", categoria: "sol" },
-        { caminho: "images/sol.3.png", legenda: "Análise do Sol", categoria: "sol" }
-    ];
-
-    const containerPrincipal = document.getElementById("conteudo-principal");
-
-    function criarSecao(titulo, itens) {
-        if (itens.length === 0) return "";
-        let htmlCards = '';
-        itens.forEach(item => {
-            htmlCards += `
-                <div class="card">
-                    <img src="${item.caminho}" alt="${item.legenda}">
-                    <div class="card-title">${item.legenda}</div>
-                </div>
-            `;
-        });
-        return `
-            <div class="section-title">${titulo}</div>
-            <div class="gallery-container">${htmlCards}</div>
-        `;
-    }
-
-    function renderizarGaleria(filtro) {
-        containerPrincipal.innerHTML = "";
-        const ceuProfundo = itensGaleria.filter(i => i.categoria === 'ceu-profundo');
-        const sistemaSolar = itensGaleria.filter(i => i.categoria === 'sistema-solar');
-        const sol = itensGaleria.filter(i => i.categoria === 'sol');
-
-        if (filtro === 'todos') {
-            containerPrincipal.innerHTML += criarSecao("🌌 Céu Profundo", ceuProfundo);
-            containerPrincipal.innerHTML += criarSecao("🪐 Sistema Solar / Lua", sistemaSolar);
-            containerPrincipal.innerHTML += criarSecao("☀️ Sol", sol);
-        } else if (filtro === 'ceu-profundo') {
-            containerPrincipal.innerHTML += criarSecao("🌌 Céu Profundo", ceuProfundo);
-        } else if (filtro === 'sistema-solar') {
-            containerPrincipal.innerHTML += criarSecao("🪐 Sistema Solar / Lua", sistemaSolar);
-        } else if (filtro === 'sol') {
-            containerPrincipal.innerHTML += criarSecao("☀️ Sol", sol);
-        }
-    }
-
-    function filtrarGaleria(categoria, botao) {
-        document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
-        botao.classList.add('active');
-        renderizarGaleria(categoria);
-    }
-
-    renderizarGaleria('todos');
-</script>
-</body>
-</html>
+        <div>&copy; 2026 Flávio da Silva. Todos os direitos reservados.
