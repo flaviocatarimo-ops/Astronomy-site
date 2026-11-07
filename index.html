@@ -27,12 +27,12 @@
         }
         h1 {
             margin: 0 0 10px 0;
-            font-size: 42px; /* Título maior */
+            font-size: 42px;
             letter-spacing: 0.5px;
             color: #ffffff;
         }
         .subtitle {
-            color: #58a6ff; /* Cor em destaque logo abaixo do título */
+            color: #58a6ff;
             margin: 0 0 8px 0;
             font-size: 18px;
             font-weight: bold;
@@ -109,7 +109,7 @@
             word-break: break-all;
         }
 
-        /* Estilo do Modal (Lightbox) */
+        /* Estilo do Modal (Lightbox) com melhoria de resolução/tamanho */
         .modal {
             display: none;
             position: fixed;
@@ -125,8 +125,10 @@
             padding: 20px;
         }
         .modal-content {
-            max-width: 90%;
-            max-height: 80vh;
+            width: 100%;
+            max-width: 1200px;
+            max-height: 85vh;
+            height: auto;
             border-radius: 8px;
             box-shadow: 0 5px 25px rgba(0,0,0,0.7);
             object-fit: contain;
@@ -174,157 +176,4 @@
         }
         .email-link {
             display: inline-block;
-            background-color: #21262d;
-            color: #58a6ff;
-            border: 1px solid #30363d;
-            padding: 8px 16px;
-            border-radius: 6px;
-            text-decoration: none;
-            font-size: 14px;
-            font-weight: bold;
-            transition: background-color 0.2s;
-        }
-        .email-link:hover {
-            background-color: #30363d;
-            color: #ffffff;
-        }
-
-        footer {
-            margin-top: auto;
-            padding-top: 40px;
-            padding-bottom: 20px;
-            color: #8a99ad;
-            font-size: 13px;
-            border-top: 1px solid #30363d;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 12px;
-        }
-    </style>
-</head>
-<body>
-
-    <!-- Cabeçalho reorganizado com título maior e descrição logo abaixo -->
-    <header>
-        <h1>Minha Galeria de Astrofotografia</h1>
-        <div class="subtitle">Trabalhos de captura e processamento com telescópio.</div>
-        <div class="author">Flávio da Silva</div>
-    </header>
-
-    <div class="filter-container">
-        <button class="filter-btn active" onclick="filtrarGaleria('todos', this)">Todos</button>
-        <button class="filter-btn" onclick="filtrarGaleria('ceu-profundo', this)">Céu Profundo</button>
-        <button class="filter-btn" onclick="filtrarGaleria('sistema-solar', this)">Sistema Solar / Lua</button>
-        <button class="filter-btn" onclick="filtrarGaleria('sol', this)">Sol</button>
-    </div>
-
-    <div id="conteudo-principal"></div>
-
-    <!-- Janela Modal (Lightbox) -->
-    <div id="lightboxModal" class="modal" onclick="fecharModal()">
-        <span class="close-modal" onclick="fecharModal()">&times;</span>
-        <img class="modal-content" id="imgAmpliada">
-        <div class="modal-caption" id="legendaAmpliada"></div>
-    </div>
-
-    <footer>
-        <div class="contact-box">
-            <h3>📬 Contacto</h3>
-            <p>Tens alguma questão sobre as capturas ou equipamento? Entra em contacto:</p>
-            <a href="mailto:o_teu_email@exemplo.com" class="email-link">📧 Enviar Email</a>
-        </div>
-
-        <div>&copy; 2026 Flávio da Silva. Todos os direitos reservados.</div>
-        <div>
-            <a href="https://info.flagcounter.com/ftVs"><img src="https://s05.flagcounter.com/count2/ftVs/bg_0B0F19/txt_FFFFFF/border_30363D/columns_2/maxflags_10/viewers_3/labels_1/pageviews_1/flags_0/percent_0/" alt="Flag Counter" border="0"></a>
-        </div>
-    </footer>
-
-<script>
-    const itensGaleria = [
-        { caminho: "images/2026-10-29T21.46.26.png", legenda: "Nebulosa de Órion", categoria: "ceu-profundo" },
-        { caminho: "images/2026-10-29T21.46.38.png", legenda: "Detalhe de Céu Profundo", categoria: "ceu-profundo" },
-        { caminho: "images/IMG_20260616_232609.jpg", legenda: "Rastos de Estrelas (Star Trails)", categoria: "ceu-profundo" },
-        { caminho: "images/IMG_20260419_023636.jpg", legenda: "Rotação Estelar", categoria: "ceu-profundo" },
-        
-        { caminho: "images/20250731_225930.jpg", legenda: "Captura Noturna", categoria: "sistema-solar" },
-        { caminho: "images/Screenshot_20231019_163639_Facebook.jpg", legenda: "Jupiter", categoria: "sistema-solar" },
-        { caminho: "images/Screenshot 2026-03-24 235314.png", legenda: "Processamento e Calibração", categoria: "sistema-solar" },
-        { caminho: "images/Lua2.jpg", legenda: "Lua2", categoria: "sistema-solar" },
-        { caminho: "images/FB_IMG_1697729740640.jpg", legenda: "Transito de Venus", categoria: "sistema-solar" },
-        { caminho: "images/Lua7.jpg", legenda: "Lua", categoria: "sistema-solar" },
-        { caminho: "images/Lua.png", legenda: "Lua", categoria: "sistema-solar" },
-        { caminho: "images/Lua.jpg", legenda: "Lua", categoria: "sistema-solar" },
-        { caminho: "images/jupiter.jpg", legenda: "Jupiter", categoria: "sistema-solar" },
-        
-        { caminho: "images/Sol5.png", legenda: "Sol - Processamento", categoria: "sol" },
-        { caminho: "images/Sol6.png", legenda: "Disco Solar Detalhado", categoria: "sol" },
-        { caminho: "images/sol.1.jpg", legenda: "Observação Solar 1", categoria: "sol" },
-        { caminho: "images/sol.3.jpg", legenda: "Observação Solar 2", categoria: "sol" },
-        { caminho: "images/sol.3.png", legenda: "Análise do Sol", categoria: "sol" },
-        { caminho: "images/Screenshot_20231101_112836_Facebook.jpg", legenda: "Eclipse parcial do Sol", categoria: "sol" },
-    ];
-
-    const containerPrincipal = document.getElementById("conteudo-principal");
-
-    function criarSecao(titulo, itens) {
-        if (itens.length === 0) return "";
-        let htmlCards = '';
-        itens.forEach(item => {
-            htmlCards += `
-                <div class="card">
-                    <img src="${item.caminho}" alt="${item.legenda}" onclick="abrirModal('${item.caminho}', '${item.legenda}')">
-                    <div class="card-title">${item.legenda}</div>
-                </div>
-            `;
-        });
-        return `
-            <div class="section-title">${titulo}</div>
-            <div class="gallery-container">${htmlCards}</div>
-        `;
-    }
-
-    function renderizarGaleria(filtro) {
-        containerPrincipal.innerHTML = "";
-        const ceuProfundo = itensGaleria.filter(i => i.categoria === 'ceu-profundo');
-        const sistemaSolar = itensGaleria.filter(i => i.categoria === 'sistema-solar');
-        const sol = itensGaleria.filter(i => i.categoria === 'sol');
-
-        if (filtro === 'todos') {
-            containerPrincipal.innerHTML += criarSecao("🌌 Céu Profundo", ceuProfundo);
-            containerPrincipal.innerHTML += criarSecao("🪐 Sistema Solar / Lua", sistemaSolar);
-            containerPrincipal.innerHTML += criarSecao("☀️ Sol", sol);
-        } else if (filtro === 'ceu-profundo') {
-            containerPrincipal.innerHTML += criarSecao("🌌 Céu Profundo", ceuProfundo);
-        } else if (filtro === 'sistema-solar') {
-            containerPrincipal.innerHTML += criarSecao("🪐 Sistema Solar / Lua", sistemaSolar);
-        } else if (filtro === 'sol') {
-            containerPrincipal.innerHTML += criarSecao("☀️ Sol", sol);
-        }
-    }
-
-    function filtrarGaleria(categoria, botao) {
-        document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
-        botao.classList.add('active');
-        renderizarGaleria(categoria);
-    }
-
-    function abrirModal(caminho, legenda) {
-        const modal = document.getElementById("lightboxModal");
-        const img = document.getElementById("imgAmpliada");
-        const cap = document.getElementById("legendaAmpliada");
-
-        modal.style.display = "flex";
-        img.src = caminho;
-        cap.innerText = legenda;
-    }
-
-    function fecharModal() {
-        document.getElementById("lightboxModal").style.display = "none";
-    }
-
-    renderizarGaleria('todos');
-</script>
-</body>
-</html>
+            background-color: #2126
